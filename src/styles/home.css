@@ -1,0 +1,588 @@
+/* ========================================
+   HOME PAGE - 모바일 뱅킹 스타일
+======================================== */
+
+.home-page {
+  width: 100%;
+  min-height: 100%;
+
+  padding: 16px 20px 28px;
+
+  background-color: #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   Greeting / Home Summary
+======================================== */
+
+.greeting {
+  margin-bottom: 12px;
+}
+
+.greeting-hello {
+  margin: 0 0 3px;
+
+  color: #6b7280;
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.greeting-name {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  line-height: 1.4;
+}
+
+
+/* ========================================
+   Asset Card
+======================================== */
+
+.asset-card {
+  margin-top: 8px;
+
+  padding: 16px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #0878b9,
+    #07558f
+  );
+
+  color: #ffffff;
+}
+
+.asset-card-top {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 8px;
+}
+
+.asset-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hide-button {
+  padding: 4px 8px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  color: white;
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+.asset-amount {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: 800;
+
+  line-height: 1.3;
+}
+
+.asset-unit {
+  font-size: 16px;
+}
+
+.asset-desc {
+  margin: 4px 0 0;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 9px;
+}
+
+
+/* ========================================
+   Quick Menu
+======================================== */
+
+.quick-menu {
+  margin-top: 20px;
+}
+
+.quick-menu ul {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.quick-menu li {
+  flex: 1;
+}
+
+.quick-menu a,
+.quick-menu button {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #1f2937;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.quick-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background-color: #f1f5f9;
+}
+
+.quick-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ========================================
+   내 계좌
+======================================== */
+
+.accounts {
+  margin-top: 26px;
+}
+
+
+/* 제목 영역 */
+
+.accounts-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 10px;
+}
+
+.accounts-header h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* 전체보기 */
+
+.view-all-button,
+.view-all-btn {
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #8a8f98;
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  cursor: pointer;
+}
+
+
+/* 계좌 리스트 */
+
+.account-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+
+/* 계좌 카드 */
+
+.account-card {
+  min-height: 64px;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 12px 14px;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 14px;
+
+  background-color: #ffffff;
+
+  box-sizing: border-box;
+}
+
+
+/* 계좌 이름 */
+
+.account-info h3 {
+  margin: 0 0 4px;
+
+  color: #1f2937;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* 계좌번호 */
+
+.account-number {
+  margin: 0;
+
+  color: #8a94a3;
+
+  font-size: 9px;
+
+  font-family: monospace;
+}
+
+
+/* 오른쪽 잔액 */
+
+.account-balance {
+  flex-shrink: 0;
+
+  text-align: right;
+}
+
+.account-balance-value {
+  margin: 0 0 4px;
+
+  color: #1f2937;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.account-type {
+  margin: 0;
+
+  color: #8a94a3;
+
+  font-size: 9px;
+}
+
+
+/* ========================================
+   최근 거래
+======================================== */
+
+.recent-transactions {
+  margin-top: 26px;
+}
+
+
+/* 최근 거래 제목 */
+
+.section-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 8px;
+}
+
+.section-header h2 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* 거래 리스트 */
+
+.transaction-list {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* 거래 하나 */
+
+.transaction-item {
+  width: 100%;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 13px 4px;
+
+  border: none;
+  border-bottom: 1px solid #edf0f2;
+
+  background-color: transparent;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+/* 클릭/호버 */
+
+.transaction-item:hover {
+  background-color: #f8fafc;
+}
+
+
+/* 거래 이름 */
+
+.transaction-info {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.transaction-info strong {
+  color: #1f2937;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* 거래 계좌 + 날짜 */
+
+.transaction-info span {
+  color: #8a94a3;
+
+  font-size: 9px;
+}
+
+
+/* 금액 */
+
+.transaction-amount {
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* 입금 */
+
+.income {
+  color: #07558f;
+}
+
+
+/* 출금 */
+
+.expense {
+  color: #d94b3d;
+}
+
+
+/* ========================================
+   거래 상세 Bottom Sheet
+======================================== */
+
+
+/* 배경 어둡게 */
+
+.transaction-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  z-index: 100;
+}
+
+
+/* 상세창 */
+
+.transaction-detail {
+  position: fixed;
+
+  bottom: 0;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 400px;
+
+  padding: 14px 20px 28px;
+
+  background-color: #ffffff;
+
+  border-radius: 26px 26px 0 0;
+
+  box-sizing: border-box;
+
+  z-index: 101;
+}
+
+
+/* 위 손잡이 */
+
+.detail-handle {
+  width: 36px;
+  height: 4px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 10px;
+
+  background-color: #cbd1d8;
+}
+
+
+/* 거래 제목 */
+
+.detail-title {
+  margin-bottom: 20px;
+}
+
+.detail-title h2 {
+  margin: 0 0 7px;
+
+  color: #1f2937;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.detail-title strong {
+  color: #1f2937;
+
+  font-size: 23px;
+  font-weight: 800;
+}
+
+
+/* 상세 정보 */
+
+.detail-info {
+  border-top: 1px solid #e5e7eb;
+}
+
+
+/* 한 줄 */
+
+.detail-row {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  font-size: 12px;
+}
+
+.detail-row span {
+  color: #8a94a3;
+}
+
+.detail-row strong {
+  color: #374151;
+
+  text-align: right;
+}
+
+
+/* 닫기 */
+
+.detail-close-btn {
+  width: 100%;
+
+  margin-top: 18px;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background-color: #f1f3f5;
+
+  color: #374151;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
