@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 const accounts = [
   {
     id: 1,
@@ -23,6 +24,8 @@ const accounts = [
 ]
 
 const AccountSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section
       className="accounts"
@@ -34,6 +37,7 @@ const AccountSection = () => {
         <button
           type="button"
           className="view-all-button"
+          onClick={() => navigate("/history")}
         >
           전체보기
         </button>

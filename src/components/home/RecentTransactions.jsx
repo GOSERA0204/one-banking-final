@@ -1,9 +1,12 @@
 import { useState } from "react";
 import TransactionDetail from "./TransactionDetail";
+import { useNavigate } from "react-router-dom";
 
 const RecentTransactions = () => {
   // 어떤 거래를 클릭했는지 저장하는 공간
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+  const navigate = useNavigate();
 
   // 최근 거래 데이터
   const transactions = [
@@ -55,7 +58,8 @@ const RecentTransactions = () => {
       <div className="section-header">
         <h2>최근 거래</h2>
 
-        <button className="view-all-btn">
+        <button className="view-all-btn"
+        onClick={() => navigate("/history")}>
           전체보기
         </button>
       </div>
