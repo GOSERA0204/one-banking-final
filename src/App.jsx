@@ -5,6 +5,7 @@ import BottomNav from './components/common/BottomNav'
 
 import HomePage from './pages/HomePage'
 import TransferPage from './pages/TransferPage'
+import TransferManualEntryPage from './pages/TransferManualEntryPage'
 import HistoryPage from './pages/HistoryPage'
 
 import './styles/common.css'
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/transfer" element={<TransferPage />} />
+            <Route path="/transfer/manual" element={<TransferManualEntryPage />} />
             <Route path="/history" element={<HistoryPage />} />
           </Routes>
         </main>
