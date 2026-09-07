@@ -1,5 +1,11 @@
+import RecentTransactions from "../components/RecentTransactions";
+
 function HomePage() {
-  return <div>홈</div>
+  return (
+    <div>
+      <RecentTransactions />
+    </div>
+  );
 }
 
-export default HomePage
+export default HomePage;
