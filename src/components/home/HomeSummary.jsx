@@ -1,9 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getAccounts } from '../../api/bankingApi'
 
 const HomeSummary = () => {
   const [isHidden, setIsHidden] = useState(false)
+  const [accounts, setAccounts] = useState([])
 
-  const totalAsset = '22,584,560'
+  useEffect(() => {
+    let cancelled = false
+    getAccounts().then((data) => {
+      if (!cancelled) setAccounts(data)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  const totalAsset = accounts.reduce((sum, acc) => sum + acc.balance, 0).toLocaleString()
 
   return (
     <>
@@ -36,7 +48,7 @@ const HomeSummary = () => {
         </p>
 
         <p className="asset-desc">
-          계좌 3개 합산 금액입니다
+          계좌 {accounts.length}개 합산 금액입니다
         </p>
       </section>
     </>

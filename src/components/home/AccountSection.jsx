@@ -1,28 +1,19 @@
-const accounts = [
-  {
-    id: 1,
-    name: '우리 첫급여통장',
-    number: '1002-***-123456',
-    balance: '2,384,560',
-    type: '입출금',
-  },
-  {
-    id: 2,
-    name: '우리 SUPER주거래통장',
-    number: '1002-***-789012',
-    balance: '15,200,000',
-    type: '저축예금',
-  },
-  {
-    id: 3,
-    name: '우리 청년도약계좌',
-    number: '1002-***-456789',
-    balance: '5,000,000',
-    type: '적금',
-  },
-]
+import { useEffect, useState } from 'react'
+import { getAccounts } from '../../api/bankingApi'
 
 const AccountSection = () => {
+  const [accounts, setAccounts] = useState([])
+
+  useEffect(() => {
+    let cancelled = false
+    getAccounts().then((data) => {
+      if (!cancelled) setAccounts(data)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   return (
     <section
       className="accounts"
@@ -44,16 +35,16 @@ const AccountSection = () => {
           <li key={account.id}>
             <article className="account-card">
               <div className="account-info">
-                <h3>{account.name}</h3>
+                <h3>{account.nickname}</h3>
 
                 <p className="account-number">
-                  {account.number}
+                  {account.accountNo}
                 </p>
               </div>
 
               <div className="account-balance">
                 <p className="account-balance-value">
-                  {account.balance}원
+                  {account.balance.toLocaleString()}원
                 </p>
 
                 <p className="account-type">

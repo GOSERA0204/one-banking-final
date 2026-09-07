@@ -1,53 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getAccounts, getTransactions } from "../../api/bankingApi";
 import TransactionDetail from "./TransactionDetail";
+
+const RECENT_COUNT = 4;
+
+// "2026-08-23" 또는 "2026.08.23" 형식 모두 "08-23"로 표시합니다.
+function formatShortDate(dateStr) {
+  const parts = dateStr.split(/[-.]/);
+  if (parts.length < 3) return dateStr;
+  return `${parts[1]}-${parts[2]}`;
+}
 
 const RecentTransactions = () => {
   // 어떤 거래를 클릭했는지 저장하는 공간
   const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
-  // 최근 거래 데이터
-  const transactions = [
-    {
-      id: 1,
-      title: "스타벅스 강남점",
-      account: "우리 청년통장 (1002-***-123456)",
-      date: "08-23",
-      fullDate: "2026-08-23 09:12",
-      amount: "-5,800원",
-      balance: "2,384,560원",
-      type: "expense",
-    },
-    {
-      id: 2,
-      title: "월급",
-      account: "우리 청년통장 (1002-***-123456)",
-      date: "08-22",
-      fullDate: "2026-08-22 09:00",
-      amount: "+3,200,000원",
-      balance: "3,205,600원",
-      type: "income",
-    },
-    {
-      id: 3,
-      title: "이선",
-      account: "우리 청년통장 (1002-***-123456)",
-      date: "08-22",
-      fullDate: "2026-08-22 14:30",
-      amount: "-30,000원",
-      balance: "3,175,600원",
-      type: "expense",
-    },
-    {
-      id: 4,
-      title: "자동이체 · 적금",
-      account: "우리 SUPER주거래통장",
-      date: "08-21",
-      fullDate: "2026-08-21 10:00",
-      amount: "-500,000원",
-      balance: "15,200,000원",
-      type: "expense",
-    },
-  ];
+  // 홈 화면에 다시 들어올 때마다 최신 계좌/거래내역을 새로 불러옵니다.
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([getAccounts(), getTransactions("ALL", "ALL")]).then(([accData, txData]) => {
+      if (cancelled) return;
+      setAccounts(accData);
+      setTransactions(txData.slice(0, RECENT_COUNT));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const accountsById = Object.fromEntries(accounts.map((acc) => [acc.id, acc]));
+
+  const displayTransactions = transactions.map((tx) => {
+    const account = accountsById[tx.accountId];
+    const accountLabel = account
+      ? `${account.nickname} (${account.accountNo})`
+      : tx.accountNickname ?? "";
+
+    return {
+      id: tx.id,
+      title: tx.desc,
+      account: accountLabel,
+      date: formatShortDate(tx.date),
+      fullDate: `${tx.date} ${tx.time}`,
+      amount: `${tx.type === "in" ? "+" : "-"}${Number(tx.amount).toLocaleString()}원`,
+      balance: `${Number(tx.balanceAfter).toLocaleString()}원`,
+      type: tx.type === "in" ? "income" : "expense",
+    };
+  });
 
   return (
     <section className="recent-transactions">
@@ -62,7 +63,7 @@ const RecentTransactions = () => {
 
       <div className="transaction-list">
 
-        {transactions.map((transaction) => (
+        {displayTransactions.map((transaction) => (
 
           <button
             className="transaction-item"
