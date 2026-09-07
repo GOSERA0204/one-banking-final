@@ -262,6 +262,28 @@ export async function lookupAccountOwner(bank, accountNo) {
 }
 
 /**
+ * 4-1. 백엔드 서버 연결 상태 확인 함수
+ * 헤더의 연동 표시등(초록불/빨간불)에서 4000번 서버가 살아있는지 가볍게 확인할 때 호출합니다.
+ * @returns {Promise<boolean>} true면 서버 연결됨, false면 서버 미연결(더미 모드)
+ */
+export async function checkServerConnection() {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 1000);
+
+    const res = await fetch(`${BASE_URL}/api/health`, {
+      credentials: "omit",
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * 4. 이체 실행 요청 함수
  * 이체 화면에서 '이체하기' 버튼을 눌렀을 때 실제로 돈을 보내는 함수입니다.
  * @param {Object} payload - { fromAccountId, toBank, toAccountNo, toOwnerName, amount }
