@@ -14,6 +14,89 @@
   color: #767676;
 }
 
+/* 선택된 받는 분 요약 카드 */
+.recipient-summary {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background-color: #f2f4f7;
+  border-radius: 12px;
+}
+
+.recipient-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.recipient-summary-bank {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 4px;
+}
+
+.recipient-summary-owner {
+  font-size: 12px;
+  color: #14875a;
+  margin: 0;
+}
+
+.recipient-summary-edit {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0066cc;
+  background: none;
+  border: 1px solid #0066cc;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* 받는사람 검색 */
+.recipient-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.search-icon {
+  flex-shrink: 0;
+  font-size: 15px;
+  color: #767676;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 15px;
+  color: #111111;
+}
+
+.search-input::placeholder {
+  color: #8e8e93;
+}
+
+.manual-entry-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0066cc;
+  background-color: #eef5fc;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 /* 내 계좌 / 최근 이체 빠른 선택 */
 .quick-pick-section {
   margin-bottom: 20px;

@@ -1,46 +1,42 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  AVATAR_COLORS,
+  BANK_LABELS,
+  MY_ACCOUNT,
+  RECENT_TRANSFERS,
+  TEST_ACCOUNTS,
+  WITHDRAW_ACCOUNTS,
+  won
+} from '../data/transferAccounts';
 import '../styles/transfer.css';
-
-const BANK_LABELS = {
-  woori: '우리은행',
-  kb: '국민은행',
-  shinhan: '신한은행',
-  hana: '하나은행',
-  kakao: '카카오뱅크'
-};
-
-const TEST_ACCOUNTS = [
-  { code: '1002123456789', owner: '김민준', bank: 'woori' },
-  { code: '1002987654321', owner: '이서연', bank: 'woori' },
-  { code: '1102555666777', owner: '박지훈', bank: 'kb' }
-];
-
-// 현재 로그인한 사용자(김민준님) 소유 계좌 — "내 계좌"로 바로 골라 보낼 수 있게 합니다.
-const MY_ACCOUNT = TEST_ACCOUNTS[0];
-// 최근에 이체한 적 있는 상대 계좌 목록
-const RECENT_TRANSFERS = TEST_ACCOUNTS.slice(1);
-const AVATAR_COLORS = ['#0066cc', '#8b5e34', '#14875a', '#c07a17'];
-
-const WITHDRAW_ACCOUNTS = [
-  { id: 'woori-1', nickname: '우리 첫급여통장', accountNo: '1002-***-123456', balance: 2384560 },
-  { id: 'woori-2', nickname: '우리 SUPER주거래통장', accountNo: '1002-***-789012', balance: 15200000 },
-  { id: 'woori-3', nickname: '우리 청년도약계좌', accountNo: '1002-***-456789', balance: 5000000 }
-];
-
-function won(amount) {
-  return `${amount.toLocaleString()}원`;
-}
 
 export default function TransferPage() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+
   const [step, setStep] = useState(1);
   const [withdrawAccountId, setWithdrawAccountId] = useState(WITHDRAW_ACCOUNTS[0].id);
   const [receivingBank, setReceivingBank] = useState('woori');
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
+  const [recipientQuery, setRecipientQuery] = useState('');
+
+  // 계좌번호 직접입력 페이지에서 "확인"을 누르고 돌아오면, 그 결과를 반영합니다.
+  useEffect(() => {
+    if (state?.receivingBank && state?.accountNumber) {
+      setReceivingBank(state.receivingBank);
+      setAccountNumber(state.accountNumber);
+    }
+  }, [state]);
 
   const withdrawAccount = WITHDRAW_ACCOUNTS.find((acc) => acc.id === withdrawAccountId);
+
+  // 이름 또는 계좌번호로 "내 계좌"/"최근 이체" 목록을 검색합니다.
+  const query = recipientQuery.trim();
+  const matchesQuery = (acc) => query === '' || acc.owner.includes(query) || acc.code.includes(query);
+  const showMyAccount = matchesQuery(MY_ACCOUNT);
+  const filteredRecentTransfers = RECENT_TRANSFERS.filter(matchesQuery);
 
   // 계좌번호로 등록된 테스트 계좌를 찾고, 선택된 은행까지 일치할 때만 예금주로 인정합니다.
   const accountByNumber = TEST_ACCOUNTS.find((acc) => acc.code === accountNumber);
@@ -62,15 +58,13 @@ export default function TransferPage() {
   }
   const isAmountValid = amountHelper.type === 'ok';
 
-  function handleAccountNumberChange(e) {
-    // 숫자 이외의 문자 제거
-    const digitsOnly = e.target.value.replace(/[^0-9]/g, '');
-    setAccountNumber(digitsOnly);
-  }
-
   function handleTestCodeClick(account) {
     setReceivingBank(account.bank);
     setAccountNumber(account.code);
+  }
+
+  function handleOpenManualEntry() {
+    navigate('/transfer/manual', { state: { receivingBank, accountNumber } });
   }
 
   function handleGoToStep2(e) {
@@ -123,54 +117,21 @@ export default function TransferPage() {
             <p className="page-subtitle">출금 계좌와 받는 분의 계좌 정보를 입력해주세요</p>
           </section>
 
-          <section className="quick-pick-section">
-            <h3 className="quick-pick-title">내 계좌</h3>
-            <ul className="quick-pick-list">
-              <li>
-                <button
-                  type="button"
-                  className="quick-pick-item"
-                  onClick={() => handleTestCodeClick(MY_ACCOUNT)}
-                >
-                  <span className="quick-pick-avatar" style={{ backgroundColor: AVATAR_COLORS[0] }}>
-                    {MY_ACCOUNT.owner[0]}
-                  </span>
-                  <span className="quick-pick-info">
-                    <span className="quick-pick-name">{MY_ACCOUNT.owner}의 {BANK_LABELS[MY_ACCOUNT.bank]} 계좌</span>
-                    <span className="quick-pick-account">{BANK_LABELS[MY_ACCOUNT.bank]} {MY_ACCOUNT.code}</span>
-                  </span>
-                </button>
-              </li>
-            </ul>
-          </section>
-
-          <section className="quick-pick-section">
-            <h3 className="quick-pick-title">최근 이체</h3>
-            <ul className="quick-pick-list">
-              {RECENT_TRANSFERS.map((acc, i) => (
-                <li key={acc.code}>
-                  <button
-                    type="button"
-                    className="quick-pick-item"
-                    onClick={() => handleTestCodeClick(acc)}
-                  >
-                    <span
-                      className="quick-pick-avatar"
-                      style={{ backgroundColor: AVATAR_COLORS[(i + 1) % AVATAR_COLORS.length] }}
-                    >
-                      {acc.owner[0]}
-                    </span>
-                    <span className="quick-pick-info">
-                      <span className="quick-pick-name">{acc.owner}</span>
-                      <span className="quick-pick-account">{BANK_LABELS[acc.bank]} {acc.code}</span>
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </section>
-
           <form className="transfer-form" onSubmit={handleGoToStep2}>
+            <div className="recipient-search">
+              <span className="search-icon" aria-hidden="true">🔍</span>
+              <input
+                type="text"
+                className="search-input"
+                placeholder="받는사람 이름 또는 계좌번호"
+                value={recipientQuery}
+                onChange={(e) => setRecipientQuery(e.target.value)}
+              />
+              <button type="button" className="manual-entry-btn" onClick={handleOpenManualEntry}>
+                + 계좌번호 직접입력
+              </button>
+            </div>
+
             <div className="form-group">
               <label htmlFor="withdraw-account" className="input-label">출금 계좌</label>
               <div className="select-wrapper">
@@ -189,58 +150,75 @@ export default function TransferPage() {
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="receiving-bank" className="input-label">받는 은행</label>
-              <div className="select-wrapper">
-                <select
-                  id="receiving-bank"
-                  className="custom-select"
-                  value={receivingBank}
-                  onChange={(e) => setReceivingBank(e.target.value)}
-                >
-                  <option value="woori">우리은행</option>
-                  <option value="kb">국민은행</option>
-                  <option value="shinhan">신한은행</option>
-                  <option value="hana">하나은행</option>
-                  <option value="kakao">카카오뱅크</option>
-                </select>
-              </div>
-            </div>
+            {showMyAccount && (
+              <section className="quick-pick-section">
+                <h3 className="quick-pick-title">내 계좌</h3>
+                <ul className="quick-pick-list">
+                  <li>
+                    <button
+                      type="button"
+                      className="quick-pick-item"
+                      onClick={() => handleTestCodeClick(MY_ACCOUNT)}
+                    >
+                      <span className="quick-pick-avatar" style={{ backgroundColor: AVATAR_COLORS[0] }}>
+                        {MY_ACCOUNT.owner[0]}
+                      </span>
+                      <span className="quick-pick-info">
+                        <span className="quick-pick-name">{MY_ACCOUNT.owner}의 {BANK_LABELS[MY_ACCOUNT.bank]} 계좌</span>
+                        <span className="quick-pick-account">{BANK_LABELS[MY_ACCOUNT.bank]} {MY_ACCOUNT.code}</span>
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+              </section>
+            )}
 
-            <div className="form-group">
-              <label htmlFor="account-number" className="input-label">계좌번호</label>
-              <input
-                type="text"
-                id="account-number"
-                className="custom-input"
-                placeholder="- 없이 숫자만 입력 (예: 1002123456789)"
-                inputMode="numeric"
-                maxLength={16}
-                value={accountNumber}
-                onChange={handleAccountNumberChange}
-              />
-              {matchedAccount && (
-                <div className="owner-chip">✓ 예금주 {matchedAccount.owner}님 확인됨</div>
-              )}
-
-              {hasInvalidAccount && (
-                <p className="field-error">계좌번호를 다시 확인해주세요.</p>
-              )}
-
-              {!matchedAccount && !hasInvalidAccount && (
-                <p className="test-account-info">
-                  테스트용 등록 계좌:{' '}
-                  {TEST_ACCOUNTS.map((acc, i) => (
-                    <span key={acc.code}>
-                      <code className="acc-code" onClick={() => handleTestCodeClick(acc)}>
-                        {acc.code}
-                      </code>{' '}
-                      ({acc.owner}, {BANK_LABELS[acc.bank]}){i < TEST_ACCOUNTS.length - 1 ? ', ' : ''}
-                    </span>
+            {filteredRecentTransfers.length > 0 && (
+              <section className="quick-pick-section">
+                <h3 className="quick-pick-title">최근 이체</h3>
+                <ul className="quick-pick-list">
+                  {filteredRecentTransfers.map((acc, i) => (
+                    <li key={acc.code}>
+                      <button
+                        type="button"
+                        className="quick-pick-item"
+                        onClick={() => handleTestCodeClick(acc)}
+                      >
+                        <span
+                          className="quick-pick-avatar"
+                          style={{ backgroundColor: AVATAR_COLORS[(i + 1) % AVATAR_COLORS.length] }}
+                        >
+                          {acc.owner[0]}
+                        </span>
+                        <span className="quick-pick-info">
+                          <span className="quick-pick-name">{acc.owner}</span>
+                          <span className="quick-pick-account">{BANK_LABELS[acc.bank]} {acc.code}</span>
+                        </span>
+                      </button>
+                    </li>
                   ))}
-                </p>
-              )}
-            </div>
+                </ul>
+              </section>
+            )}
+
+            {accountNumber !== '' && (
+              <section className="recipient-summary">
+                <div className="recipient-summary-row">
+                  <div>
+                    <p className="recipient-summary-bank">{BANK_LABELS[receivingBank]} {accountNumber}</p>
+                    {matchedAccount && (
+                      <p className="recipient-summary-owner">✓ {matchedAccount.owner}님 확인됨</p>
+                    )}
+                    {hasInvalidAccount && (
+                      <p className="field-error">계좌번호를 다시 확인해주세요.</p>
+                    )}
+                  </div>
+                  <button type="button" className="recipient-summary-edit" onClick={handleOpenManualEntry}>
+                    수정
+                  </button>
+                </div>
+              </section>
+            )}
 
             <div className="btn-area">
               <button
