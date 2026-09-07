@@ -1,0 +1,327 @@
+.page-title-section {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: #767676;
+}
+
+/* 내 계좌 / 최근 이체 빠른 선택 */
+.quick-pick-section {
+  margin-bottom: 20px;
+}
+
+.quick-pick-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.quick-pick-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.quick-pick-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 6px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.quick-pick-item:hover {
+  background-color: #f2f4f7;
+}
+
+.quick-pick-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-pick-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.quick-pick-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.quick-pick-account {
+  font-size: 12px;
+  color: #767676;
+}
+
+/* 폼 요소 */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.custom-select, .custom-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  background-color: #f2f4f7;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #111111;
+  outline: none;
+  appearance: none;
+}
+
+.custom-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.custom-input::placeholder {
+  color: #8e8e93;
+  font-size: 14px;
+}
+
+.amount-input {
+  text-align: right;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.amount-input.ok {
+  border-color: #14875a;
+}
+
+.amount-input.err {
+  border-color: #e8483a;
+  background-color: #fdeceb;
+}
+
+.amount-helper {
+  font-size: 11.5px;
+  margin-top: 6px;
+  padding-left: 2px;
+}
+
+.amount-helper.ok {
+  color: #14875a;
+}
+
+.amount-helper.err {
+  color: #e8483a;
+}
+
+.amount-quick {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.amount-quick button {
+  font-size: 12px;
+  font-weight: 700;
+  color: #333333;
+  background-color: #f2f4f7;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 6px 11px;
+  cursor: pointer;
+}
+
+.amount-quick button:hover {
+  border-color: #0066cc;
+  color: #0066cc;
+}
+
+.custom-input:focus, .custom-select:focus {
+  border-color: #0066cc;
+  background-color: #ffffff;
+}
+
+.test-account-info {
+  font-size: 11px;
+  color: #8e8e93;
+  margin-top: 8px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.test-account-info code {
+  background-color: #eef2f6;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #444444;
+  cursor: pointer;
+}
+
+.test-account-info code:hover {
+  background-color: #dbe4ee;
+  color: #0066cc;
+}
+
+.confirm-card {
+  background-color: #eef5fc;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.confirm-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 0;
+  font-size: 13.5px;
+}
+
+.confirm-key {
+  color: #767676;
+}
+
+.confirm-value {
+  font-weight: 700;
+  color: #111111;
+}
+
+.confirm-total {
+  border-top: 1px dashed #c4cad1;
+  margin-top: 6px;
+  padding-top: 14px;
+}
+
+.confirm-amount {
+  font-size: 18px;
+  color: #0066cc;
+}
+
+.success-wrap {
+  text-align: center;
+  padding: 40px 20px 10px;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e6f7ee;
+  color: #14875a;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.success-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #111111;
+  margin: 0 0 8px;
+}
+
+.success-desc {
+  font-size: 13px;
+  color: #767676;
+  margin: 0 0 24px;
+}
+
+.owner-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 8px;
+  background-color: #e6f7ee;
+  color: #14875a;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 9999px;
+}
+
+.field-error {
+  font-size: 11px;
+  color: #e8483a;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* 하단 버튼 */
+.btn-area {
+  margin-top: 32px;
+}
+
+.btn-next {
+  width: 100%;
+  height: 52px;
+  background-color: #c4c9d1;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: not-allowed;
+  transition: background-color 0.2s ease;
+}
+
+.btn-next.active {
+  background-color: #0066cc;
+  cursor: pointer;
+}
+
+.btn-back {
+  width: 100%;
+  height: 52px;
+  margin-top: 10px;
+  background-color: #ffffff;
+  color: #333333;
+  border: 1.5px solid #eaeaea;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
