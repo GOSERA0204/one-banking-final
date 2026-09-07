@@ -1,0 +1,277 @@
+.home-page {
+  width: 100%;
+  padding: 12px 12px 24px;
+  background-color: #ffffff;
+}
+
+/* =========================
+   Greeting
+========================= */
+
+.greeting {
+  margin-bottom: 12px;
+}
+
+.greeting-hello {
+  margin: 0 0 2px;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.greeting-name {
+  margin: 0;
+  color: #111111;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+
+/* =========================
+   Asset Card
+========================= */
+
+.asset-card {
+  margin-top: 8px;
+  padding: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #0878b9 0%,
+    #07558f 100%
+  );
+
+  border-radius: 14px;
+
+  color: #ffffff;
+}
+
+.asset-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 7px;
+}
+
+.asset-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.hide-button {
+  padding: 4px 8px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.asset-amount {
+  margin: 0;
+
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+
+  letter-spacing: 0.2px;
+}
+
+.asset-unit {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.asset-desc {
+  margin: 4px 0 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 9px;
+}
+
+
+/* =========================
+   Quick Menu
+========================= */
+
+.quick-menu {
+  margin-top: 18px;
+}
+
+.quick-menu ul {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.quick-menu li {
+  flex: 1;
+}
+
+.quick-menu a,
+.quick-menu button {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #111111;
+
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.quick-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #f4f7fa;
+
+  border-radius: 10px;
+}
+
+.quick-icon img {
+  width: 19px;
+  height: 19px;
+}
+
+
+/* =========================
+   Accounts
+========================= */
+
+.accounts {
+  margin-top: 20px;
+}
+
+.accounts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 8px;
+}
+
+.accounts-header h2 {
+  margin: 0;
+
+  color: #111111;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.view-all-button {
+  padding: 0;
+
+  border: none;
+  background: none;
+
+  color: #8a8f98;
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+.account-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.account-card {
+  min-height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  border: 1px solid #e3e7ec;
+  border-radius: 11px;
+
+  background-color: #ffffff;
+}
+
+.account-info {
+  min-width: 0;
+}
+
+.account-info h3 {
+  margin: 0 0 3px;
+
+  color: #111111;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.account-number {
+  margin: 0;
+
+  color: #7d8490;
+
+  font-size: 7px;
+  font-family: monospace;
+}
+
+.account-balance {
+  flex-shrink: 0;
+
+  text-align: right;
+}
+
+.account-balance-value {
+  margin: 0 0 3px;
+
+  color: #111111;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.account-type {
+  margin: 0;
+
+  color: #8a8f98;
+
+  font-size: 8px;
+}
