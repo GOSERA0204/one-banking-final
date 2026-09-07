@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAccounts, getTransactions } from "../../api/bankingApi";
 import TransactionDetail from "./TransactionDetail";
+import { useNavigate } from "react-router-dom";
 
 const RECENT_COUNT = 4;
 
@@ -16,6 +17,8 @@ const RecentTransactions = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [accounts, setAccounts] = useState([]);
   const [transactions, setTransactions] = useState([]);
+
+  const navigate = useNavigate();
 
   // 홈 화면에 다시 들어올 때마다 최신 계좌/거래내역을 새로 불러옵니다.
   useEffect(() => {
@@ -56,7 +59,8 @@ const RecentTransactions = () => {
       <div className="section-header">
         <h2>최근 거래</h2>
 
-        <button className="view-all-btn">
+        <button className="view-all-btn"
+        onClick={() => navigate("/history")}>
           전체보기
         </button>
       </div>

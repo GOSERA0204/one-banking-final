@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getAccounts } from '../../api/bankingApi'
 
 const AccountSection = () => {
+  const navigate = useNavigate();
   const [accounts, setAccounts] = useState([])
 
   useEffect(() => {
@@ -25,6 +27,7 @@ const AccountSection = () => {
         <button
           type="button"
           className="view-all-button"
+          onClick={() => navigate("/history")}
         >
           전체보기
         </button>

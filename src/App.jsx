@@ -9,6 +9,7 @@ import TransferManualEntryPage from './pages/TransferManualEntryPage'
 import HistoryPage from './pages/HistoryPage'
 
 import './styles/common.css'
+//
 
 function App() {
   return (
