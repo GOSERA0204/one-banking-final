@@ -1,6 +1,5 @@
 import { useState } from "react";
 import TransactionDetail from "./TransactionDetail";
-import "../styles/home02.css";
 
 const RecentTransactions = () => {
   // 어떤 거래를 클릭했는지 저장하는 공간
