@@ -20,12 +20,6 @@ export const MY_ACCOUNT = TEST_ACCOUNTS[0];
 export const RECENT_TRANSFERS = TEST_ACCOUNTS.slice(1);
 export const AVATAR_COLORS = ['#0066cc', '#8b5e34', '#14875a', '#c07a17'];
 
-export const WITHDRAW_ACCOUNTS = [
-  { id: 'woori-1', nickname: '우리 첫급여통장', accountNo: '1002-***-123456', balance: 2384560 },
-  { id: 'woori-2', nickname: '우리 SUPER주거래통장', accountNo: '1002-***-789012', balance: 15200000 },
-  { id: 'woori-3', nickname: '우리 청년도약계좌', accountNo: '1002-***-456789', balance: 5000000 }
-];
-
 export function won(amount) {
   return `${amount.toLocaleString()}원`;
 }

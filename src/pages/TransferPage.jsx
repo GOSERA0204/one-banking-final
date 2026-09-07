@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getAccounts, postTransfer } from '../api/bankingApi';
 import {
   AVATAR_COLORS,
   BANK_LABELS,
   MY_ACCOUNT,
   RECENT_TRANSFERS,
   TEST_ACCOUNTS,
-  WITHDRAW_ACCOUNTS,
   won
 } from '../data/transferAccounts';
 import '../styles/transfer.css';
@@ -16,11 +16,30 @@ export default function TransferPage() {
   const { state } = useLocation();
 
   const [step, setStep] = useState(1);
-  const [withdrawAccountId, setWithdrawAccountId] = useState(WITHDRAW_ACCOUNTS[0].id);
+  const [accounts, setAccounts] = useState([]);
+  const [isLoadingAccounts, setIsLoadingAccounts] = useState(true);
+  const [withdrawAccountId, setWithdrawAccountId] = useState('');
   const [receivingBank, setReceivingBank] = useState('woori');
   const [accountNumber, setAccountNumber] = useState('');
   const [amount, setAmount] = useState('');
   const [recipientQuery, setRecipientQuery] = useState('');
+  const [isTransferring, setIsTransferring] = useState(false);
+  const [transferError, setTransferError] = useState('');
+
+  // 실제 계좌 목록(백엔드 연결 시 진짜 데이터, 아니면 bankingApi의 더미 데이터)을 불러옵니다.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const data = await getAccounts();
+      if (cancelled) return;
+      setAccounts(data);
+      setWithdrawAccountId(data[0]?.id ?? '');
+      setIsLoadingAccounts(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // 계좌번호 직접입력 페이지에서 "확인"을 누르고 돌아오면, 그 결과를 반영합니다.
   useEffect(() => {
@@ -30,7 +49,7 @@ export default function TransferPage() {
     }
   }, [state]);
 
-  const withdrawAccount = WITHDRAW_ACCOUNTS.find((acc) => acc.id === withdrawAccountId);
+  const withdrawAccount = accounts.find((acc) => acc.id === withdrawAccountId);
 
   // 이름 또는 계좌번호로 "내 계좌"/"최근 이체" 목록을 검색합니다.
   const query = recipientQuery.trim();
@@ -47,7 +66,7 @@ export default function TransferPage() {
 
   const numericAmount = Number(amount);
   let amountHelper = { text: '', type: '' };
-  if (amount !== '' && numericAmount > 0) {
+  if (amount !== '' && numericAmount > 0 && withdrawAccount) {
     if (numericAmount > withdrawAccount.balance) {
       amountHelper = { text: `잔액(${won(withdrawAccount.balance)})을 초과했습니다`, type: 'err' };
     } else if (numericAmount < 1000) {
@@ -100,12 +119,35 @@ export default function TransferPage() {
     setStep(2);
   }
 
-  function handleConfirmTransfer() {
-    setStep(4);
+  async function handleConfirmTransfer() {
+    setTransferError('');
+    setIsTransferring(true);
+    try {
+      await postTransfer({
+        fromAccountId: withdrawAccountId,
+        toBank: receivingBank,
+        toAccountNo: accountNumber,
+        toOwnerName: matchedAccount.owner,
+        amount: numericAmount,
+      });
+      setStep(4);
+    } catch (err) {
+      setTransferError(err.message || '이체 처리 중 오류가 발생했습니다.');
+    } finally {
+      setIsTransferring(false);
+    }
   }
 
   function handleGoHome() {
     navigate('/');
+  }
+
+  if (isLoadingAccounts) {
+    return (
+      <section className="page-title-section">
+        <h2 className="page-title">계좌 정보를 불러오는 중입니다...</h2>
+      </section>
+    );
   }
 
   return (
@@ -141,7 +183,7 @@ export default function TransferPage() {
                   value={withdrawAccountId}
                   onChange={(e) => setWithdrawAccountId(e.target.value)}
                 >
-                  {WITHDRAW_ACCOUNTS.map((acc) => (
+                  {accounts.map((acc) => (
                     <option key={acc.id} value={acc.id}>
                       {acc.nickname} ({won(acc.balance)})
                     </option>
@@ -309,11 +351,18 @@ export default function TransferPage() {
             </div>
           </div>
 
+          {transferError && <p className="field-error">{transferError}</p>}
+
           <div className="btn-area">
-            <button type="button" className="btn-next active" onClick={handleConfirmTransfer}>
-              이체하기
+            <button
+              type="button"
+              className="btn-next active"
+              onClick={handleConfirmTransfer}
+              disabled={isTransferring}
+            >
+              {isTransferring ? '처리 중...' : '이체하기'}
             </button>
-            <button type="button" className="btn-back" onClick={handleBackToStep2}>
+            <button type="button" className="btn-back" onClick={handleBackToStep2} disabled={isTransferring}>
               이전으로
             </button>
           </div>
