@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { checkServerConnection } from "../../api/bankingApi";
 
 export default function Header() {
+  const navigate = useNavigate();
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -35,7 +37,14 @@ export default function Header() {
       </div>
       <div className="header-actions">
         <button type="button" className="icon-btn" aria-label="알림">🔔</button>
-        <button type="button" className="icon-btn" aria-label="전체 메뉴">☰</button>
+        <button
+          type="button"
+          className="icon-btn"
+          aria-label="전체 메뉴"
+          onClick={() => navigate('/all')}
+        >
+          ☰
+        </button>
       </div>
     </header>
   );
