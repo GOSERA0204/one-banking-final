@@ -20,8 +20,8 @@ export default function TransferPage() {
   const [accounts, setAccounts] = useState([]);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(true);
   const [withdrawAccountId, setWithdrawAccountId] = useState('');
-  const [receivingBank, setReceivingBank] = useState('woori');
-  const [accountNumber, setAccountNumber] = useState('');
+  const [receivingBank, setReceivingBank] = useState(state?.receivingBank ?? 'woori');
+  const [accountNumber, setAccountNumber] = useState(state?.accountNumber ?? '');
   const [amount, setAmount] = useState('');
   const [recipientQuery, setRecipientQuery] = useState('');
   const [isTransferring, setIsTransferring] = useState(false);
@@ -41,13 +41,6 @@ export default function TransferPage() {
       cancelled = true;
     };
   }, []);
-
-  useEffect(() => {
-    if (state?.receivingBank && state?.accountNumber) {
-      setReceivingBank(state.receivingBank);
-      setAccountNumber(state.accountNumber);
-    }
-  }, [state]);
 
   const withdrawAccount = accounts.find((acc) => acc.id === withdrawAccountId);
 
