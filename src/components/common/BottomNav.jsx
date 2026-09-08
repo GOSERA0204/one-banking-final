@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 const NAV_ITEMS = [
   { key: 'home', to: '/', icon: '🏠', label: '홈' },
   { key: 'transfer', to: '/transfer', icon: '💸', label: '이체' },
-  { key: 'history', to: '/history', icon: '📋', label: '거래내역' }
+  { key: 'history', to: '/history', icon: '📋', label: '거래내역' },
+  { key: 'all', to: '/all', icon: '⋯', label: '전체' }
 ];
 
 export default function BottomNav() {
@@ -25,10 +26,6 @@ export default function BottomNav() {
           </Link>
         );
       })}
-      <a href="#none" className="nav-item">
-        <span className="nav-icon">⋯</span>
-        <span className="nav-label">전체</span>
-      </a>
     </nav>
   );
 }

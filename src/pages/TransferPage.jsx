@@ -15,6 +15,7 @@ export default function TransferPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
+
   const [step, setStep] = useState(1);
   const [accounts, setAccounts] = useState([]);
   const [isLoadingAccounts, setIsLoadingAccounts] = useState(true);
@@ -26,7 +27,7 @@ export default function TransferPage() {
   const [isTransferring, setIsTransferring] = useState(false);
   const [transferError, setTransferError] = useState('');
 
-  // 실제 계좌 목록(백엔드 연결 시 진짜 데이터, 아니면 bankingApi의 더미 데이터)을 불러옵니다.
+  
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -41,7 +42,6 @@ export default function TransferPage() {
     };
   }, []);
 
-  // 계좌번호 직접입력 페이지에서 "확인"을 누르고 돌아오면, 그 결과를 반영합니다.
   useEffect(() => {
     if (state?.receivingBank && state?.accountNumber) {
       setReceivingBank(state.receivingBank);
@@ -51,16 +51,13 @@ export default function TransferPage() {
 
   const withdrawAccount = accounts.find((acc) => acc.id === withdrawAccountId);
 
-  // 이름 또는 계좌번호로 "내 계좌"/"최근 이체" 목록을 검색합니다.
   const query = recipientQuery.trim();
   const matchesQuery = (acc) => query === '' || acc.owner.includes(query) || acc.code.includes(query);
   const showMyAccount = matchesQuery(MY_ACCOUNT);
   const filteredRecentTransfers = RECENT_TRANSFERS.filter(matchesQuery);
 
-  // 계좌번호로 등록된 테스트 계좌를 찾고, 선택된 은행까지 일치할 때만 예금주로 인정합니다.
   const accountByNumber = TEST_ACCOUNTS.find((acc) => acc.code === accountNumber);
   const matchedAccount = accountByNumber && accountByNumber.bank === receivingBank ? accountByNumber : null;
-  // 계좌번호를 다 입력했는데도 등록된 계좌가 아니거나(계좌번호 자체가 없거나) 은행이 다르면 동일한 오류로 처리합니다.
   const hasInvalidAccount = accountNumber.length >= 10 && !matchedAccount;
   const isAccountVerified = Boolean(matchedAccount);
 
