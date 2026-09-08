@@ -1,0 +1,155 @@
+.lock-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f2f7fa;
+  padding: 56px 24px 28px;
+}
+
+.lock-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.lock-logo-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #0066b3;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lock-logo-text {
+  font-size: 19px;
+  font-weight: 700;
+  color: #004088;
+}
+
+.lock-guide-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111111;
+  margin-bottom: 28px;
+}
+
+.lock-indicator-row {
+  display: flex;
+  gap: 16px;
+}
+
+.lock-indicator-row.shake {
+  animation: lock-shake 0.42s ease;
+}
+
+@keyframes lock-shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+
+.lock-indicator-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #b9c4cf;
+  background-color: transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.lock-indicator-dot.filled {
+  background-color: #0066b3;
+  border-color: #0066b3;
+}
+
+.lock-indicator-dot.error.filled {
+  background-color: #e8483a;
+  border-color: #e8483a;
+}
+
+.lock-error-text {
+  height: 16px;
+  margin-top: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: transparent;
+}
+
+.lock-error-text.visible {
+  color: #e8483a;
+}
+
+.lock-keypad {
+  width: 100%;
+  max-width: 300px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lock-keypad-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lock-key {
+  flex: 1;
+  height: 60px;
+  background: none;
+  border: none;
+  border-radius: 16px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111111;
+  cursor: pointer;
+}
+
+.lock-key:hover {
+  background-color: #e7eef4;
+}
+
+.lock-key:active {
+  background-color: #dbe6ee;
+}
+
+.lock-key-func {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0066b3;
+}
+
+.lock-key-func:disabled {
+  color: #b9c4cf;
+  cursor: not-allowed;
+}
+
+.lock-key-func:disabled:hover {
+  background-color: transparent;
+}
+
+.lock-forgot-link {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  font-size: 12.5px;
+  color: #767676;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lock-demo-hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: #b9c4cf;
+}

@@ -1,0 +1,257 @@
+.all-menu-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 1. 헤더 영역 */
+.all-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.user-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111111;
+}
+
+.user-chevron {
+  font-size: 18px;
+  color: #767676;
+}
+
+.header-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.round-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #f2f4f7;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.round-icon-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.ai-consult-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 12px;
+  background-color: #0066cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ai-consult-btn img {
+  width: 15px;
+  height: 15px;
+  filter: brightness(0) invert(1);
+}
+
+/* 퀵 뱅킹 아이콘 메뉴 */
+.quick-icon-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.quick-icon-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.quick-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #eef5fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quick-icon-circle img {
+  width: 22px;
+  height: 22px;
+}
+
+.quick-icon-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333333;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* 2. 최근/인기 상품 영역 */
+.product-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-tabs {
+  display: flex;
+  gap: 16px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.product-tab {
+  padding: 0 2px 10px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #999999;
+  cursor: pointer;
+}
+
+.product-tab.active {
+  color: #0066cc;
+  border-bottom-color: #0066cc;
+}
+
+.product-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-card {
+  padding: 14px 16px;
+  background-color: #f2f4f7;
+  border-radius: 12px;
+}
+
+.product-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 4px;
+}
+
+.product-card-desc {
+  font-size: 12px;
+  color: #767676;
+  margin: 0;
+}
+
+/* 3. 카테고리별 서비스 탭 & 상세 메뉴 */
+.category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-tabs-wrapper {
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 -20px;
+  padding: 0 20px;
+}
+
+.category-tabs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 14px;
+  white-space: nowrap;
+}
+
+.category-tab {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  background-color: #f2f4f7;
+  border: none;
+  border-radius: 9999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #767676;
+  cursor: pointer;
+}
+
+.category-tab.active {
+  background-color: #0066cc;
+  color: #ffffff;
+}
+
+.category-menu-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.menu-group-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #004088;
+  margin: 0 0 10px;
+}
+
+.menu-group-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.menu-entry {
+  padding: 9px 14px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu-entry:hover {
+  border-color: #0066cc;
+  color: #0066cc;
+}
